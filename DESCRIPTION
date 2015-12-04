@@ -1,0 +1,17 @@
+Package: NGS
+Version: 0.0.1
+Date: 2015-12-04
+Title: Next Generation Sequencing Data Analysis
+Description: The whole pipeline of analysing next generation sequencing data.
+Author: Ge Tan <ge.tan09@imperial.ac.uk>
+Maintainer: Ge Tan <ge.tan09@imperial.ac.uk>
+Imports: BiocGenerics
+Depends: R (>= 3.2.2)
+Suggests: BiocStyle, knitr, rmarkdown
+VignetteBuilder: knitr
+License: LICENSE
+URL: https://github.com/ge11232002/NGS
+BugReports: https://github.com/ge11232002/NGS/issues
+Type: Package
+LazyData: yes
+
