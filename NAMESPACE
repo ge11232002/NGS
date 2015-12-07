@@ -1,0 +1,11 @@
+
+### -----------------------------------------------------------------
+### Export non-generic functions
+###
+export(
+  ## fastq.R
+  getPairedReads,
+  
+  ## util.R
+  grepPatternList
+)
