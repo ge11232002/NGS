@@ -9,9 +9,9 @@ getPairedReads <- function(reads1){
                                    "F5-RNA.csfasta"))
   for (i in 1:nrow(filePairs)){
     x <- filePairs$reads1[i]
-    if (my.grep(x, reads1)){
+    if (all(grepPatternList(x, reads1))){
       reads2 <- sub(x, filePairs$reads2[i], reads1)
-      if(file.exists(reads2)){
+      if(all(file.exists(reads2))){
         return(reads2)
       }
     }
@@ -24,4 +24,21 @@ getPairedReads <- function(reads1){
 ### Not Exported!
 countReadsInFastq <- function(filepath){
   ans <- sapply(lapply(filepath, fastq.geometry), "[", 1)
+}
+
+### -----------------------------------------------------------------
+### trimFastq: trim left, right, low quality tail
+### Exported!
+trimFastq <- function(reads1, paired=FALSE){
+  nTotalReads <- countReadsInFastq(reads1)
+  if(paired){
+    reads2 <- getPairedReads(reads1)
+    if(is.null(reads2)){
+      stop("The paired reads do not exist!")
+    }
+  }
+  # the numebr of reads can be fewer than  1e6
+  nYield <- min(1e6, nTotalReads)
+  
+  
 }
