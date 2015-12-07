@@ -29,16 +29,55 @@ countReadsInFastq <- function(filepath){
 ### -----------------------------------------------------------------
 ### trimFastq: trim left, right, low quality tail
 ### Exported!
-trimFastq <- function(reads1, paired=FALSE){
+trimFastq <- function(reads1, paired=TRUE, nReads=-1L, minTailQuality=20){
   nTotalReads <- countReadsInFastq(reads1)
   if(paired){
     reads2 <- getPairedReads(reads1)
     if(is.null(reads2)){
       stop("The paired reads do not exist!")
     }
+  }else{
+    reads2 <- NULL
   }
+  isPaired <- paired 
+  
   # the numebr of reads can be fewer than  1e6
   nYield <- min(1e6, nTotalReads)
   
+  fqs1 <- FastqStreamer(reads1, nYield)
+  if(isPaired){
+    fqs2 <- FastqStreamer(reads2, nYield)
+  }
   
+  ## If we only sample a fixed number of nReads
+  if(config$nReads > 0 && config$nReads < nTotalReads){ 
+    ## nReads is set to -1L by default!
+    idx <- round(seq(from=1, to=nYield, 
+                     length=(round(nYield/nTotalReads * nReads))))
+  }else{
+    idx <- NULL
+  }
+  
+  ## Read the fastq files
+  while(length(x1 <- yield(fqs1))){
+    ## Subset the reads
+    if (!is.null(idx)){
+      if (length(x1) < nYield){
+        ## when reading the last we want to truncate idx
+        idx <- idx[idx <= length(x1)]
+      }
+      x1 <- x1[idx]
+    }
+    if (isPaired){
+      x2 <- yield(fqs2)
+      if (!is.null(idx)){
+        x2 <- x2[idx]
+      }
+    }
+    
+    ## Remove tails
+    if (!is.null(minTailQuality)){
+      
+    }
+  }
 }
