@@ -1,5 +1,10 @@
 
 ### -----------------------------------------------------------------
+### Import ordinary functions, variables in other packages
+###
+importFrom(Biostrings, fastq.geometry)
+
+### -----------------------------------------------------------------
 ### Export non-generic functions
 ###
 export(
@@ -9,3 +14,4 @@ export(
   ## util.R
   grepPatternList
 )
+

@@ -1,7 +1,6 @@
 ### -----------------------------------------------------------------
 ### grep for a patternList with the combination of "or" or "and"
 ### Exported!
-
 grepPatternList <- function(patternList, x, combine=c("or", "and"), ...){
   combine <- match.arg(combine)
   result <- logical(length(x))
@@ -19,4 +18,6 @@ grepPatternList <- function(patternList, x, combine=c("or", "and"), ...){
   }
   result
 }
+
+
 

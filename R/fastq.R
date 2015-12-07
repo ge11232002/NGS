@@ -19,3 +19,9 @@ getPairedReads <- function(reads1){
   return(NULL)
 }
 
+### -----------------------------------------------------------------
+### count the number of records in fastq files
+### Not Exported!
+countReadsInFastq <- function(filepath){
+  ans <- sapply(lapply(filepath, fastq.geometry), "[", 1)
+}
