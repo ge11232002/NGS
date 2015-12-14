@@ -81,7 +81,7 @@ my.mclapply <- function(x, FUN, ..., mc.preschedule=TRUE,
   result <- mclapply(x, FUN, ..., mc.preschedule=mc.preschedule, 
                      mc.set.seed=mc.set.seed,
                      mc.silent=mc.silent, mc.cores=min(mc.cores, length(x)))
-  isError <- sapply(result, function(x){any(my.grep("error", class(x), 
+  isError <- sapply(result, function(x){any(grepPatternList("error", class(x), 
                                                     ignore.case=TRUE))})
   if (any(isError)){
     sapply(result[isError], print)

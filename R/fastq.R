@@ -49,10 +49,13 @@ getLastGoodBasePos <- function(qualities, minTailQuality){
 ### -----------------------------------------------------------------
 ### trimFastq: trim left, right, low quality tail
 ### Exported!
-trimFastqOneRead <- function(reads1, paired=TRUE, nReads=-1L, 
-                             minTailQuality=20,
-                             mc.cores=round(getThreads()/2)){
+trimFastqOneRead <- function(reads1, outputDir=".", paired=TRUE, nReads=-1L, 
+                             minTailQuality=20, trimLeft=0L, trimRight=0L,
+                             mc.cores=getThreads()){
+  job <- my.jobStart(paste("start", basename(reads1)))
+  
   nTotalReads <- countReadsInFastq(reads1)
+  my.writeElapsed(job, status="reads1 counted")
   nTotalReads <- setNames(nTotalReads, basename(reads1))
   if(paired){
     reads2 <- getPairedReads(reads1)
@@ -60,6 +63,7 @@ trimFastqOneRead <- function(reads1, paired=TRUE, nReads=-1L,
       stop("The paired reads do not exist!")
     }
     nTotalReads2 <- countReadsInFastq(reads2)
+    my.writeElapsed(job, status="reads2 counted")
     nTotalReads2 <- setNames(nTotalReads2, basename(reads2))
     if(any(nTotalReads != nTotalReads2)){
       stop("The number of reads in first reads is differrent 
@@ -99,18 +103,63 @@ trimFastqOneRead <- function(reads1, paired=TRUE, nReads=-1L,
       }
       x1 <- x1[idx]
     }
-    if (isPaired){
+    if(isPaired){
       x2 <- yield(fqs2)
-      if (!is.null(idx)){
+      if(!is.null(idx)){
         x2 <- x2[idx]
       }
     }
-    endPos <- width(x1)
+    endPos1 <- width(x1)
     ## Remove tails
-    if (!is.null(minTailQuality)){
-      lastGoodBase <- unlist(my.mclapply(getQualities(x), getLastGoodBasePos,
-                                        minTailQuality,
-                                        mc.cores=mc.cores))
+    if(!is.null(minTailQuality)){
+      lastGoodBase1 <- unlist(my.mclapply(getQualities(x1), getLastGoodBasePos,
+                                          minTailQuality,
+                                          mc.cores=mc.cores))
+      my.writeElapsed(job, status="getEndPos for reads1")
+      use <- lastGoodBase1 >= endPos1/2
+      if(isPaired){
+        endPos2 <- width(x2)
+        lastGoodBase2 <- unlist(my.mclapply(getQualities(x2), 
+                                            getLastGoodBasePos,
+                                            minTailQuality,
+                                            mc.cores=mc.cores))
+        my.writeElapsed(job, status="getEndPos for reads2")
+        use2 <- lastGoodBase2 >= endPos2/2
+        use <- use & use2
+        endPos2[use] <- lastGoodBase2[use]
+      }
+      endPos1[use] <- lastGoodBase1[use]
+    }
+    if(trimRight > 0){
+      endPos1 <- pmin(endPos1, width(x1) - trimRight)
+      if(isPaired){
+        endPos2 <- pmin(endPos2, width(x2), trimRight)
+      }
+    }
+    target1 <- sub("\\.gz$", "", basename(reads1))
+    writeFastq(narrow(x1, start=trimLeft+1, end=endPos1),
+               file=file.path(outputDir, target1), mode="a", compress=FALSE)
+    if(isPaired){
+      target2 <- sub("\\.gz$", "", basename(reads2))
+      writeFastq(narrow(x2, start=trimLeft+1, end=endPos2),
+                 file=file.path(outputDir, target2), mode="a", compress=FALSE)
     }
   }
+  my.writeElapsed(job)
+  my.write("file size: ", file.size(reads1)/1e6, " MB")
+  if(isPaired){
+    my.write("file size: ", file.size(reads2)/1e6, " MB")
+  }
+
+  return(target1)
+}
+
+trimFastq <- function(reads1, outputDir=".", paired=TRUE, nReads=-1L, 
+                      minTailQuality=20, trimLeft=0L, trimRight=0L,
+                      mc.cores=round(getThreads()/2)){
+  ans <- sapply(reads1, trimFastqOneRead, outputDir=outputDir,
+                paired=paired, nReads=nReads, minTailQuality=minTailQuality,
+                trimLeft=trimLeft, trimRight=trimRight,
+                mc.cores=mc.cores)
+  return(ans)
 }
