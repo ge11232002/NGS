@@ -5,7 +5,11 @@ Title: Next Generation Sequencing Data Analysis
 Description: The whole pipeline of analysing next generation sequencing data.
 Author: Ge Tan <ge.tan09@imperial.ac.uk>
 Maintainer: Ge Tan <ge.tan09@imperial.ac.uk>
-Imports: BiocGenerics, Biostrings (>= 2.38.2)
+Imports: BiocGenerics,
+         Biostrings (>= 2.38.2),
+         ShortRead (>= 1.28.0),
+         caTools (>= 1.17.1),
+         parallel
 Depends: R (>= 3.2.2)
 Suggests: BiocStyle, knitr, rmarkdown
 VignetteBuilder: knitr

@@ -27,30 +27,61 @@ countReadsInFastq <- function(filepath){
 }
 
 ### -----------------------------------------------------------------
+### return a list of qualities from shorReadQ class 
+### Not Exported!
+getQualities <- function(shortReadQ){
+  qual <- as(quality(shortReadQ), "matrix")
+  qList <- apply(qual, 1, na.omit)
+  return(qList)
+}
+
+### -----------------------------------------------------------------
+### return a list of qualities from shorReadQ class 
+### Not Exported!
+getLastGoodBasePos <- function(qualities, minTailQuality){
+  ## do not search for low qualities in the first 5 bases!!!!
+  qualities[1:5] <- minTailQuality 
+  lastGood1 <- match(TRUE, runmean(qualities, 4, align="left", alg="fast") <
+                       minTailQuality, nomatch=length(qualities)+1) - 1
+  return(lastGood1)
+}
+
+### -----------------------------------------------------------------
 ### trimFastq: trim left, right, low quality tail
 ### Exported!
-trimFastq <- function(reads1, paired=TRUE, nReads=-1L, minTailQuality=20){
+trimFastqOneRead <- function(reads1, paired=TRUE, nReads=-1L, 
+                             minTailQuality=20,
+                             mc.cores=round(getThreads()/2)){
   nTotalReads <- countReadsInFastq(reads1)
+  nTotalReads <- setNames(nTotalReads, basename(reads1))
   if(paired){
     reads2 <- getPairedReads(reads1)
     if(is.null(reads2)){
       stop("The paired reads do not exist!")
     }
+    nTotalReads2 <- countReadsInFastq(reads2)
+    nTotalReads2 <- setNames(nTotalReads2, basename(reads2))
+    if(any(nTotalReads != nTotalReads2)){
+      stop("The number of reads in first reads is differrent 
+           from paired reads: ", basename(reads1)[nTotalReads != nTotalReads2])
+    }
   }else{
     reads2 <- NULL
   }
-  isPaired <- paired 
+  isPaired <- paired
   
   # the numebr of reads can be fewer than  1e6
   nYield <- min(1e6, nTotalReads)
   
   fqs1 <- FastqStreamer(reads1, nYield)
+  on.exit(close(fqs1))
   if(isPaired){
     fqs2 <- FastqStreamer(reads2, nYield)
+    on.exit(close(fqs2))
   }
   
   ## If we only sample a fixed number of nReads
-  if(config$nReads > 0 && config$nReads < nTotalReads){ 
+  if(nReads > 0 && nReads < nTotalReads){ 
     ## nReads is set to -1L by default!
     idx <- round(seq(from=1, to=nYield, 
                      length=(round(nYield/nTotalReads * nReads))))
@@ -74,10 +105,12 @@ trimFastq <- function(reads1, paired=TRUE, nReads=-1L, minTailQuality=20){
         x2 <- x2[idx]
       }
     }
-    
+    endPos <- width(x1)
     ## Remove tails
     if (!is.null(minTailQuality)){
-      
+      lastGoodBase <- unlist(my.mclapply(getQualities(x), getLastGoodBasePos,
+                                        minTailQuality,
+                                        mc.cores=mc.cores))
     }
   }
 }

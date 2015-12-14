@@ -1,8 +1,16 @@
+### -----------------------------------------------------------------
+### Import S4 methods defined in other packages
+###
+importMethodsFrom(ShortRead, FastqStreamer)
+importMethodsFrom(Biostrings, quality, unlist)
+
 
 ### -----------------------------------------------------------------
 ### Import ordinary functions, variables in other packages
 ###
-importFrom(Biostrings, fastq.geometry)
+importFrom(Biostrings, fastq.geometry, PhredQuality)
+importFrom(caTools, runmean)
+importFrom(parallel, detectCores)
 
 ### -----------------------------------------------------------------
 ### Export non-generic functions
