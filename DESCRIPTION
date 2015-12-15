@@ -11,11 +11,11 @@ Imports: BiocGenerics,
          caTools (>= 1.17.1),
          parallel
 Depends: R (>= 3.2.2)
-Suggests: BiocStyle, knitr, rmarkdown
+Suggests: BiocStyle, knitr, rmarkdown,
+    testthat
 VignetteBuilder: knitr
 License: LICENSE
 URL: https://github.com/ge11232002/NGS
 BugReports: https://github.com/ge11232002/NGS/issues
 Type: Package
 LazyData: yes
-

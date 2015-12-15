@@ -1,9 +1,9 @@
 ### -----------------------------------------------------------------
 ### Import S4 methods defined in other packages
 ###
-importMethodsFrom(ShortRead, FastqStreamer)
-importMethodsFrom(Biostrings, quality, unlist)
-
+importMethodsFrom(ShortRead, FastqStreamer, yield, writeFastq)
+importMethodsFrom(Biostrings, quality, unlist, width)
+importMethodsFrom(IRanges, narrow)
 
 ### -----------------------------------------------------------------
 ### Import ordinary functions, variables in other packages
