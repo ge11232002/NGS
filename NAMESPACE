@@ -18,6 +18,7 @@ importFrom(parallel, detectCores)
 export(
   ## fastq.R
   getPairedReads,
+  trimFastq,
   
   ## util.R
   grepPatternList

@@ -31,7 +31,8 @@ countReadsInFastq <- function(filepath){
 ### Not Exported!
 getQualities <- function(shortReadQ){
   qual <- as(quality(shortReadQ), "matrix")
-  qList <- apply(qual, 1, na.omit)
+  qList <- lapply(as.list(as.data.frame(t(qual))), na.omit)
+  #qList <- apply(qual, 1, na.omit)
   return(qList)
 }
 
