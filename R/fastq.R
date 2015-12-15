@@ -157,7 +157,7 @@ trimFastqOneRead <- function(reads1, outputDir=".", paired=TRUE, nReads=-1L,
 
 trimFastq <- function(reads1, outputDir=".", paired=TRUE, nReads=-1L, 
                       minTailQuality=20, trimLeft=0L, trimRight=0L,
-                      mc.cores=round(getThreads()/2)){
+                      mc.cores=getThreads()){
   ans <- sapply(reads1, trimFastqOneRead, outputDir=outputDir,
                 paired=paired, nReads=nReads, minTailQuality=minTailQuality,
                 trimLeft=trimLeft, trimRight=trimRight,

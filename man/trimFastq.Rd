@@ -15,7 +15,7 @@
 }
 
 \arguments{
-  \item{read1}{
+  \item{reads1}{
     The \code{character} vector. The filenames of first reads.
   }
   \item{outputDir}{

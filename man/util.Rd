@@ -16,7 +16,7 @@
     The \code{character} string of pattern list to grep.
   }
   \item{x}{
-    See the argument \code{x} in \link{\code{grep}} method.
+    See the argument \code{x} in \code{grep} method.
   }
   \item{combine}{
     When it's "or", for each element of x, a TRUE value will be returned

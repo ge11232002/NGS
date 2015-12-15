@@ -9,11 +9,11 @@
   get the filenames of the paired reads fastq if exist.
 }
 \usage{
-  getPairedReads(read1)
+  getPairedReads(reads1)
 }
 
 \arguments{
-  \item{read1}{
+  \item{reads1}{
     The filenames of the first reads.
   }
 }
