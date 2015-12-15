@@ -60,8 +60,10 @@
 \examples{
   reads1 <- file.path(system.file("extdata", package="NGS"), "fastq", 
                       "nanocage_ACAGAT_carp_embryo_R1.fastq")
-  trimmedFastqs <- trimFastq(reads1, outputDir=".", paired=TRUE, nReads=-1L, 
-                             minTailQuality=20, trimLeft=0L, trimRight=0L,
+  trimmedFastqs <- trimFastq(reads1, outputDir=".", paired=TRUE, 
+                             nReads=-1L, 
+                             minTailQuality=20, 
+                             trimLeft=0L, trimRight=0L,
                              mc.cores=1L)
   file.remove(trimmedFastqs, NGS:::getPairedReads(trimmedFastqs))
 }
