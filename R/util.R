@@ -34,16 +34,16 @@ getElapsed <- function(x){
 grepPatternList <- function(patternList, x, combine=c("or", "and"), ...){
   combine <- match.arg(combine)
   result <- logical(length(x))
-  if (combine == "or"){
-    for (pattern in patternList){
+  if(combine == "or"){
+    for(pattern in patternList){
       idx <- grep(pattern, x, ...)
       result[idx] <- TRUE
     }
-  } else if (combine == "and"){
+  }else if(combine == "and"){
     result[] <- TRUE
-    for (pattern in patternList){
-      idx <- grep(pattern, x, ...)
-      result[-idx] <- FALSE
+    for(pattern in patternList){
+      idx <- grepl(pattern, x, ...)
+      result[!idx] <- FALSE
     }
   }
   result

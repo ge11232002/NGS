@@ -164,3 +164,7 @@ trimFastq <- function(reads1, outputDir=".", paired=TRUE, nReads=-1L,
                 mc.cores=mc.cores)
   return(ans)
 }
+
+### -----------------------------------------------------------------
+### 
+###
