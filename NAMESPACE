@@ -4,7 +4,6 @@
 importMethodsFrom(ShortRead, FastqStreamer, yield, writeFastq)
 importMethodsFrom(Biostrings, quality, unlist, width)
 importMethodsFrom(IRanges, narrow)
-importMethodsFrom(stats, na.omit)
 
 ### -----------------------------------------------------------------
 ### Import ordinary functions, variables in other packages
@@ -12,7 +11,7 @@ importMethodsFrom(stats, na.omit)
 importFrom(Biostrings, fastq.geometry, PhredQuality)
 importFrom(caTools, runmean)
 importFrom(parallel, detectCores, mclapply)
-importFrom(stats, setNames)
+importFrom(stats, na.omit, setNames)
 
 ### -----------------------------------------------------------------
 ### Export non-generic functions
