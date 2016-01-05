@@ -2,10 +2,10 @@
 \alias{grepPatternList}
 
 \title{
-  Some improved utils functions
+  Enhanced grep function
 }
 \description{
-  Some base functions are customised for our use.
+  Enhanced grep function which can search with multiple patterns.
 }
 \usage{
   grepPatternList(patternList, x, combine=c("or", "and"), ...)
