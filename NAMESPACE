@@ -12,6 +12,8 @@ importFrom(Biostrings, fastq.geometry, PhredQuality)
 importFrom(caTools, runmean)
 importFrom(parallel, detectCores, mclapply)
 importFrom(stats, na.omit, setNames)
+importFrom(tools, file_ext)
+importFrom(R.utils, gunzip)
 
 ### -----------------------------------------------------------------
 ### Export non-generic functions
@@ -20,6 +22,7 @@ export(
   ## fastq.R
   getPairedReads,
   trimFastq,
+  fastUniq,
   
   ## util.R
   grepPatternList

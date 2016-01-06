@@ -25,3 +25,5 @@ test_that("trimFastq generated the right fastq", {
   
   file.remove(trimmedFastqs, NGS:::getPairedReads(trimmedFastqs))
 })
+
+

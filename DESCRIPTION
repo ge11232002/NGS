@@ -10,7 +10,9 @@ Imports: BiocGenerics,
          ShortRead (>= 1.28.0),
          caTools (>= 1.17.1),
          parallel,
-         IRanges (>= 2.4.6)
+         IRanges (>= 2.4.6),
+         tools,
+         R.utils
 Depends: R (>= 3.2.2)
 Suggests: BiocStyle,
           knitr,

@@ -166,5 +166,37 @@ trimFastq <- function(reads1, outputDir=".", paired=TRUE, nReads=-1L,
 }
 
 ### -----------------------------------------------------------------
-### 
-###
+### FastUniq: wrapper for De Novo Duplicates Removal Tool for Paired Short Reads
+### This only works for paired-end reads and doesn't require reference genome.
+### Get rid of duplicates introduced by PCR amplification.
+### Exported!
+fastUniq <- function(reads1, outputDir=".", binary="fastuniq"){
+  if(length(file_ext(reads1)) != 1L){
+    stop("The reads1 have different file extensions!")
+  }
+  
+  reads2 <- getPairedReads(reads1)
+  if(is.null(reads2)){
+    stop("fastUniq only works on paired-end reads!")
+  }
+  
+  if(isGzipped(reads1[1])){
+    reads1Temp <- gunzip(filename=reads1, temporary=TRUE)
+    reads2Temp <- gunzip(filename=reads2, temporary=TRUE)
+  }
+  for(i in 1:length(reads1)){
+    inputListFile <- tempfile()
+    writeLines(c(reads1[i], reads2[i]), con=inputListFile)
+    args <- c(paste("-i", inputListFile), 
+              paste("-o", file.path(outputDir, sub("\\.gz$", "", 
+                                                   basename(reads1[i])))),
+              paste("-p", file.path(outputDir, sub("\\.gz$", "",
+                                                   basename(reads2[i]))))
+    )
+    system2(command=binary, args=args)
+    unlink(inputListFile)
+  }
+  return(file.path(outputDir, sub("\\.gz$", "", basename(reads1))))
+}
+
+
