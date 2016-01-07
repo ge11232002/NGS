@@ -36,6 +36,11 @@ Xu, H., Luo, X., Qian, J., Pang, X., Song, J., Qian, G., Chen, J., and Chen, S. 
 \author{
   Ge Tan
 }
+\note{
+  Other possible tools for removing duplicates from fastq files:
+  1. fastx_collapser in the FASTX-Toolkit; 2. rmdup in the SAMtools package;
+  3. MarkDuplicates in the Picard toolkit.
+}
 
 \examples{
   \donttest{
