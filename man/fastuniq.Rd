@@ -26,6 +26,10 @@
 \details{
   The original FastUniq works for both Fastq and Fasta files.
   We only use it for fastq files.
+  
+  Other possible tools for removing duplicates from fastq files:
+  1. fastx_collapser in the FASTX-Toolkit; 2. rmdup in the SAMtools package;
+  3. MarkDuplicates in the Picard toolkit.
 }
 \value{
   The filenames of generated first reads.
@@ -36,10 +40,9 @@ Xu, H., Luo, X., Qian, J., Pang, X., Song, J., Qian, G., Chen, J., and Chen, S. 
 \author{
   Ge Tan
 }
+
 \note{
-  Other possible tools for removing duplicates from fastq files:
-  1. fastx_collapser in the FASTX-Toolkit; 2. rmdup in the SAMtools package;
-  3. MarkDuplicates in the Picard toolkit.
+  Usually it's not recommended to remove duplicates in RNA-Seq dataset.
 }
 
 \examples{
