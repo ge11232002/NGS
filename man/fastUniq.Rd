@@ -20,7 +20,7 @@
     Where to put the output.
   }
   \item{binary}{
-    The name/filename of the binary to call.
+    The name/filename of the binary "fastuniq" to call.
   }
 }
 \details{

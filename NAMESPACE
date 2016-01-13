@@ -24,6 +24,9 @@ export(
   trimFastq,
   fastUniq,
   
+  ## bamMethods.R
+  sortIndexBam,
+  
   ## util.R
   grepPatternList
 )
