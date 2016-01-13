@@ -53,4 +53,4 @@
                            mustWork=TRUE)
   sortIndexBam(input=bamfile, output="ex1_sorted.bam", removeBam=FALSE)
 }
-
+}
