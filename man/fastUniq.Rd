@@ -9,7 +9,7 @@
   A Fast De Novo Duplicates Removal Tool for Paired Short Reads.
 }
 \usage{
-  fastuniq(reads1, outputDir=".", binary="fastuniq")
+  fastUniq(reads1, outputDir=".", binary="fastuniq")
 }
 
 \arguments{
