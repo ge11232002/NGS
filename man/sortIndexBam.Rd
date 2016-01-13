@@ -43,7 +43,7 @@
 }
 
 \seealso{
-  indexBam and sortBam from Rsamtools
+  indexBam and sortBam, asBam from Rsamtools
 }
 \examples{
   \donttest{
