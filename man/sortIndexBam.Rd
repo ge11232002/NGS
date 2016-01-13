@@ -8,8 +8,8 @@
   sortIndexBam sort the bam file by coordinates and index it.
 }
 \usage{
-  sortIndexBam <- function(inputs, outputs, maxMem="4096M", removeBam=TRUE,
-                           mc.cores=getThreads(), binary="samtools")
+  sortIndexBam(inputs, outputs, maxMem="4096M", removeBam=TRUE,
+               mc.cores=getThreads(), binary="samtools")
 }
 
 \arguments{
