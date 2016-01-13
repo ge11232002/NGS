@@ -1,5 +1,5 @@
 Package: NGS
-Version: 0.0.2
+Version: 0.0.3
 Date: 2016-01-13
 Title: Next Generation Sequencing Data Analysis
 Description: The whole pipeline of analysing next generation sequencing data.
@@ -17,7 +17,8 @@ Suggests: BiocStyle,
           knitr,
           rmarkdown,
           testthat,
-          BiocGenerics
+          BiocGenerics,
+          Rsamtools
 VignetteBuilder: knitr
 License: Mozilla Public License 2.0
 URL: https://github.com/ge11232002/NGS

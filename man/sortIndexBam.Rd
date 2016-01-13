@@ -52,5 +52,5 @@
   bamfile <- system.file("extdata", "ex1.bam", package="Rsamtools",
                            mustWork=TRUE)
   sortIndexBam(input=bamfile, output="ex1_sorted.bam", removeBam=FALSE)
-}
+  }
 }
