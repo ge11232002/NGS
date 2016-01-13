@@ -1,6 +1,6 @@
 Package: NGS
-Version: 0.0.1
-Date: 2015-12-04
+Version: 0.0.2
+Date: 2016-01-13
 Title: Next Generation Sequencing Data Analysis
 Description: The whole pipeline of analysing next generation sequencing data.
 Author: Ge Tan <ge.tan09@imperial.ac.uk>
