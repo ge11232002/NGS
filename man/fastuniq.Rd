@@ -1,5 +1,5 @@
-\name{fastuniq}
-\alias{fastuniq}
+\name{fastUniq}
+\alias{fastUniq}
 
 \title{
   Duplicated reads removal

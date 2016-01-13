@@ -13,7 +13,7 @@ importFrom(caTools, runmean)
 importFrom(parallel, detectCores, mclapply)
 importFrom(stats, na.omit, setNames)
 importFrom(tools, file_ext)
-importFrom(R.utils, gunzip)
+importFrom(R.utils, gunzip, isGzipped)
 
 ### -----------------------------------------------------------------
 ### Export non-generic functions
