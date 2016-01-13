@@ -11,14 +11,14 @@ Imports: Biostrings (>= 2.38.2),
          parallel,
          IRanges (>= 2.4.6),
          tools,
-         R.utils
+         R.utils,
+         Rsamtools (>= 1.22.0)
 Depends: R (>= 3.2.2)
 Suggests: BiocStyle,
           knitr,
           rmarkdown,
           testthat,
-          BiocGenerics,
-          Rsamtools
+          BiocGenerics
 VignetteBuilder: knitr
 License: Mozilla Public License 2.0
 URL: https://github.com/ge11232002/NGS

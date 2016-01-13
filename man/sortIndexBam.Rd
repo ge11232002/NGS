@@ -8,15 +8,15 @@
   sortIndexBam sort the bam file by coordinates and index it.
 }
 \usage{
-  sortIndexBam <- function(input, output, maxMem="4096M", removeBam=TRUE,
+  sortIndexBam <- function(inputs, outputs, maxMem="4096M", removeBam=TRUE,
                            mc.cores=getThreads(), binary="samtools")
 }
 
 \arguments{
-  \item{input}{
+  \item{inputs}{
     The filenames of input bam files.
   }
-  \item{output}{
+  \item{outputs}{
     The filenames of output bam files.
   }
   \item{maxMem}{
@@ -51,6 +51,6 @@
   library(Rsamtools)
   bamfile <- system.file("extdata", "ex1.bam", package="Rsamtools",
                            mustWork=TRUE)
-  sortIndexBam(input=bamfile, output="ex1_sorted.bam", removeBam=FALSE)
+  sortIndexBam(inputs=bamfile, outputs="ex1_sorted.bam", removeBam=FALSE)
   }
 }
