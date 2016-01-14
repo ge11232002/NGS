@@ -3,10 +3,12 @@
 ### Exported!
 getPairedReads <- function(reads1){
   filePairs <- data.frame(reads1=c("R1_001.fastq.gz", "R1.fastq.gz", 
-                                   "R1.fastq", "F3.csfasta", "F3.csfasta"),
+                                   "R1.fastq", "F3.csfasta", "F3.csfasta",
+                                   "READ1.fq.gz"),
                           reads2=c("R2_001.fastq.gz", "R2.fastq.gz", 
                                    "R2.fastq", "F5-BC.csfasta", 
-                                   "F5-RNA.csfasta"))
+                                   "F5-RNA.csfasta",
+                                   "READ2.fq.gz"))
   for (i in 1:nrow(filePairs)){
     x <- filePairs$reads1[i]
     if (all(grepPatternList(x, reads1))){
