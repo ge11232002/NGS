@@ -43,6 +43,9 @@ bwaMem <- function(reads1, output, ref, opt="", mc.cores=getThreads(),
   file.rename(tempBam, output)
   indexBam(output)
   
+  ## bam to bigwig files
+  bam2bigwig(output)
+  
   invisible(output)
 }
 
