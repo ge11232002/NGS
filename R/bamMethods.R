@@ -90,10 +90,39 @@ bam2bigwig <- function(bamFiles,
 
 ### -----------------------------------------------------------------
 ### getBamMultiMatching: get the numbers of multi-hits for bam file
-### 
-getBamMultiMatching <- function(bamFile){
+###
+getBamMultiMatching <- function(bamFile, 
+                                pairedMode=c("paired", "first", "second")){
+  pairedMode <- match.arg(pairedMode)
+  
   job <- my.jobStart(paste("bam multimatch", basename(bamFile)))
-   
+  param <- ScanBamParam(what="qname")
+  bamFlag(param) <- scanBamFlag(isUnmappedQuery=FALSE)
+  
+  ## test paired-end or not
+  paired <- testPairedEndBam(bamFile)
+  if(paired){
+    bamFlag(param) <- switch(pairedMode,
+                             paired=scanBamFlag(isFirstMateRead=TRUE,
+                                                isProperPair=TRUE,
+                                                isUnmappedQuery=FALSE),
+                             first=scanBamFlag(isFirstMateRead=TRUE,
+                                               isUnmappedQuery=FALSE),
+                             second=scanBamFlag(isSecondMateRead=TRUE,
+                                                isUnmappedQuery=FALSE))
+  }
+  bamReads <- scanBam(bamFile, param=param)[[1]]$qname
+  result <- table(bamReads)
+  result2 <- table(result)
+  
+  nReads <- getBamInputReadCount(bamFile)
+  if(!is.na(nReads)){
+    nReadsUnmapped <- nReads - sum(result)
+    result2 <- c("0"=nReadsUnmapped, result2)
+    my.writeElapsed(job, "nreads from header loaded")
+  }
+  my.writeElapsed(job, "done")
+  return(result2)
 }
 
 ### -----------------------------------------------------------------

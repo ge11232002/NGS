@@ -33,7 +33,7 @@
   \code{\link{addInputReadCounts}}
 }
 \examples{
-  \donttest{
+  \dontrun{
   ## This example is not tested because it requires external software "samtools"
   bamfile <- system.file("extdata", "ex1.bam", package="Rsamtools",
                          mustWork=TRUE)
