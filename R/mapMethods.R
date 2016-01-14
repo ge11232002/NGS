@@ -39,7 +39,8 @@ bwaMem <- function(reads1, output, ref, opt="", mc.cores=getThreads(),
   
   ## sort and index bam
   tempBam <- tempfile(fileext=".bam")
-  sortBam(output, tempBam)
+  tempBam <- sortBam(output, sub("\\.bam$", "", tempBam, ignore.case=TRUE))
+  
   file.copy(tempBam, output, overwrite=TRUE)
   file.remove(tempBam)
   indexBam(output)
