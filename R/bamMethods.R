@@ -51,15 +51,17 @@ addInputReadCounts <- function(bamFiles, reads1s, binary="samtools"){
     tempBam <- tempfile(fileext=".bam")
     args <- c("reheader", headerFile, bamFile, ">", tempBam)
     system2(command=binary, args=args)
+    file.remove(headerFile)
     
     # Move the tempBam back
     file.copy(tempBam, bamFile, overwrite=TRUE)
     file.remove(tempBam)
     
-    # recreate the index file
-    indexBam(bamFile)
-    
-    file.remove(headerFile)
+    # recreate the index file if exists
+    baiFile <- paste0(bamFile, ".bai")
+    if(file.exists(baiFile)){
+      indexBam(bamFile)
+    }
   }
   invisible(bamFiles)
 }
