@@ -4,7 +4,7 @@
 importMethodsFrom(ShortRead, FastqStreamer, yield, writeFastq)
 importMethodsFrom(Biostrings, quality, unlist, width)
 importMethodsFrom(IRanges, narrow)
-importMethodsFrom(Rsamtools, indexBam, sortBam)
+importMethodsFrom(Rsamtools, indexBam, sortBam, scanBamHeader)
 importMethodsFrom(GenomicAlignments, readGAlignments, coverage)
 importMethodsFrom(rtracklayer, export.bw)
 
@@ -31,6 +31,7 @@ export(
   sortIndexBam,
   addInputReadCounts,
   bam2bigwig,
+  getBamInputReadCount,
   
   ## mapMethods.R
   bwaMem,

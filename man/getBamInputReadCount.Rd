@@ -1,36 +1,37 @@
-\name{addInputReadCounts}
-\alias{addInputReadCounts}
+\name{getBamInputReadCount}
+\alias{getBamInputReadCount}
 
 \title{
-  addInputReadCounts
+  getBamInputReadCount
 }
 \description{
-  Add the number of input reads as a comment to the header of bamFile.
+  Fetch the number of input reads from bam files
 }
 \usage{
-  addInputReadCounts(bamFiles, reads1s, binary = "samtools")
+  getBamInputReadCount(bamFiles)
 }
 
 \arguments{
   \item{bamFiles}{
     The filenames of input bam files.
   }
-  \item{reads1s}{
-    The filenames of the corresponding input fastq files.
-  }
-  \item{binary}{
-    The name/filename of the binary "samtools" to call.
-  }
 }
-
+\details{
+  This function reads the header of bam files and searches for the comment line
+  "INPUTREADCOUNT", which can be added by \code{\link{addInputReadCounts}}.
+}
 \value{
-  The filenames of input bam files.
+  The number of input reads are returned. If the "INPUTREADCOUNT" doesn't exist,
+  NA is returned.
 }
 
 \author{
   Ge Tan
 }
 
+\seealso{
+  \code{\link{addInputReadCounts}}
+}
 \examples{
   \donttest{
   ## This example is not tested because it requires external software "samtools"
@@ -41,6 +42,8 @@
   reads1 <- file.path(system.file("extdata", package="NGS"), "fastq",
                     "nanocage_ACAGAT_carp_embryo_R1.fastq")
   addInputReadCounts(bamFiles=tempBamFile, reads1s=reads1, binary="samtools")
+  
+  getBamInputReadCount(tempBamFile)
   file.remove(tempBamFile)
   }
 }

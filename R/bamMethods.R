@@ -88,3 +88,41 @@ bam2bigwig <- function(bamFiles,
   invisible(bigwigFiles)
 }
 
+### -----------------------------------------------------------------
+### getBamMultiMatching: get the numbers of multi-hits for bam file
+### 
+getBamMultiMatching <- function(bamFile){
+  job <- my.jobStart(paste("bam multimatch", basename(bamFile)))
+   
+}
+
+### -----------------------------------------------------------------
+### getBamInputReadCount: get the number of input reads
+### Exported!
+getBamInputReadCount <- function(bamFiles){
+  ans <- c()
+  for(i in 1:length(bamFiles)){
+    bamFile <- bamFiles[i]
+    header <- scanBamHeader(bamFile)[[1]]
+    ## test whether there is any comment line
+    if(sum(names(header$text) == "@CO") == 0){
+      ans <- c(ans, NA)
+    }
+    ## get the comment lines
+    commentLinesIndex <- which(names(header$text) == "@CO")
+    for(i in 1:length(commentLinesIndex)){
+      commentLine <- header$text[[commentLinesIndex[i]]]
+      searchResults <- grepl("^INPUTREADCOUNT:", commentLine)
+      numOfCount <- sum(searchResults)
+      if(numOfCount == 0){
+        next
+      }else if(numOfCount == 1){
+        nReads <- as.integer(sub("^INPUTREADCOUNT:", "", commentLine[which(searchResults)]))
+        ans <- c(ans, nReads)
+      }else{
+        stop("more than one INPUTREADCOUNT found in ", bamFile)
+      }
+    }
+  }
+  return(ans)
+}
