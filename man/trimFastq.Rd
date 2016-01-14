@@ -43,7 +43,7 @@
     The number of bases to cut on the right (tail) of the read.
   }
   \item{mc.cores}{
-    The number of threads to use. By default, 
+    The number of threads to use. By default,
     we use a internal function  \code{NGS:::getThreads} to decide.
   }
 }

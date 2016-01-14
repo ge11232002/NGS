@@ -12,7 +12,7 @@ mapBWA <- function(){
 
 ### -----------------------------------------------------------------
 ### BWA-MEM algorithm for 70bp-1Mbp query sequences
-### 
+### Exported!
 bwaMem <- function(reads1, output, ref, opt="", mc.cores=getThreads(),
                    binaryBWA="bwa", binarySamtools="samtools"){
   if(length(reads1) != 1L || length(output) != 1L){
