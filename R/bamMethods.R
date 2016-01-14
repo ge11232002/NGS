@@ -62,3 +62,10 @@ addInputReadCounts <- function(inputs, reads1s, binary="samtools"){
   }
   invisible(inputs)
 }
+
+### -----------------------------------------------------------------
+### bam2bigwig: refer to http://rseqc.sourceforge.net/#bam2wig-py
+### Exported!
+bam2bigwig <- function(){
+  
+}
