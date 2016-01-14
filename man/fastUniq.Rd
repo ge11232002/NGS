@@ -43,6 +43,7 @@ Xu, H., Luo, X., Qian, J., Pang, X., Song, J., Qian, G., Chen, J., and Chen, S. 
 
 \note{
   Usually it's not recommended to remove duplicates in RNA-Seq dataset.
+  This is a standard procedure for Chip-Seq.
 }
 
 \examples{
