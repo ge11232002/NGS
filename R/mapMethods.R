@@ -40,7 +40,8 @@ bwaMem <- function(reads1, output, ref, opt="", mc.cores=getThreads(),
   ## sort and index bam
   tempBam <- tempfile(fileext=".bam")
   sortBam(output, tempBam)
-  file.rename(tempBam, output)
+  file.copy(tempBam, output, overwrite=TRUE)
+  file.remove(tempBam)
   indexBam(output)
   
   ## bam to bigwig files
