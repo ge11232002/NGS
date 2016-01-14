@@ -5,10 +5,10 @@
   bam2bigwig
 }
 \description{
-  Convert a bam file into a bigwig file with coverage
+  Convert a bam file into a bigwig file with coverage.
 }
 \usage{
-  bam2bigwig(bamFiles, bigwigFiles = sub("\\.bam$", ".bw", bamFiles, 
+  bam2bigwig(bamFiles, bigwigFiles = sub("\\\.bam$", ".bw", bamFiles, 
                                          ignore.case = TRUE))
 }
 

@@ -4,8 +4,9 @@
 importMethodsFrom(ShortRead, FastqStreamer, yield, writeFastq)
 importMethodsFrom(Biostrings, quality, unlist, width)
 importMethodsFrom(IRanges, narrow)
-importMethodsFrom(Rsamtools, indexBam)
-importMethodsFrom(GenomicAlignments, readGAlignments)
+importMethodsFrom(Rsamtools, indexBam, sortBam)
+importMethodsFrom(GenomicAlignments, readGAlignments, coverage)
+importMethodsFrom(rtracklayer, export.bw)
 
 ### -----------------------------------------------------------------
 ### Import ordinary functions, variables in other packages
