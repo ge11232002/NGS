@@ -53,7 +53,8 @@ addInputReadCounts <- function(bamFiles, reads1s, binary="samtools"){
     system2(command=binary, args=args)
     
     # Move the tempBam back
-    file.rename(tempBam, bamFile)
+    file.copy(tempBam, bamFile, overwrite=TRUE)
+    file.remove(tempBam)
     
     # recreate the index file
     indexBam(bamFile)
