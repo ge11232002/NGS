@@ -38,7 +38,7 @@ bwaMem <- function(reads1, output, ref, opt="", mc.cores=getThreads(),
   addInputReadCounts(output, reads1)
   
   ## sort and index bam
-  tempBam <- tempfile(fileext="bam")
+  tempBam <- tempfile(fileext=".bam")
   sortBam(output, tempBam)
   file.rename(tempBam, output)
   indexBam(output)

@@ -5,6 +5,7 @@ importMethodsFrom(ShortRead, FastqStreamer, yield, writeFastq)
 importMethodsFrom(Biostrings, quality, unlist, width)
 importMethodsFrom(IRanges, narrow)
 importMethodsFrom(Rsamtools, indexBam)
+importMethodsFrom(GenomicAlignments, readGAlignments)
 
 ### -----------------------------------------------------------------
 ### Import ordinary functions, variables in other packages
@@ -28,6 +29,7 @@ export(
   ## bamMethods.R
   sortIndexBam,
   addInputReadCounts,
+  bam2bigwig,
   
   ## util.R
   grepPatternList

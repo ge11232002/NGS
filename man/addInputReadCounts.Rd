@@ -8,11 +8,11 @@
   Add the number of input reads as a comment to the header of bamFile.
 }
 \usage{
-  addInputReadCounts(inputs, reads1s, binary = "samtools")
+  addInputReadCounts(bamFiles, reads1s, binary = "samtools")
 }
 
 \arguments{
-  \item{inputs}{
+  \item{bamFiles}{
     The filenames of input bam files.
   }
   \item{reads1s}{
