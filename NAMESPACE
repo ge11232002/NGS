@@ -5,7 +5,7 @@ importMethodsFrom(ShortRead, FastqStreamer, yield, writeFastq)
 importMethodsFrom(Biostrings, quality, unlist, width)
 importMethodsFrom(IRanges, narrow)
 importMethodsFrom(Rsamtools, indexBam, sortBam, scanBamHeader, ScanBamParam,
-                             testPairedEndBam)
+                             testPairedEndBam, scanBam)
 importMethodsFrom(GenomicAlignments, readGAlignments, coverage)
 importMethodsFrom(rtracklayer, export.bw)
 
@@ -18,7 +18,7 @@ importFrom(parallel, detectCores, mclapply)
 importFrom(stats, na.omit, setNames)
 importFrom(tools, file_ext)
 importFrom(R.utils, gunzip, isGzipped)
-importFrom(Rsamtools, scanBamFlag)
+importFrom(Rsamtools, scanBamFlag, "bamFlag<-")
 
 ### -----------------------------------------------------------------
 ### Export non-generic functions
