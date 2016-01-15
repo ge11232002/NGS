@@ -9,8 +9,8 @@
 }
 \usage{
   makeAlignmentCountBarPlot(bamFiles, txtFile="read-alignment-statistics.txt",
-                            pairedMode = c("paired", "first", "second"),
-                            mc.cores = getThreads())
+                            pairedMode=c("paired", "first", "second"),
+                            mc.cores=getThreads())
 }
 
 \arguments{

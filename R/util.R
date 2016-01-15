@@ -90,3 +90,12 @@ my.mclapply <- function(x, FUN, ..., mc.preschedule=TRUE,
   return(result)
 }
 
+### -----------------------------------------------------------------
+### shrinkToRange
+### Not Exported!
+shrinkToRange <- function(x, theRange){
+  x[ x > theRange[2]] = theRange[2]
+  x[ x < theRange[1]] = theRange[1]
+  return(x)
+}
+
