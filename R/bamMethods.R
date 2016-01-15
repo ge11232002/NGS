@@ -90,10 +90,16 @@ bam2bigwig <- function(bamFiles,
 
 ### -----------------------------------------------------------------
 ### getBamMultiMatching: get the numbers of multi-hits for bam file
-###
-getBamMultiMatching <- function(bamFile, 
+### The input bam files have to be sorted and indexed.
+### Exported!
+getBamMultiMatching <- function(bamFile,
                                 pairedMode=c("paired", "first", "second")){
   pairedMode <- match.arg(pairedMode)
+  
+  baiFile <- paste0(bamFile, ".bai")
+  if(!file.exists(baiFile)){
+    stop("The input bam file has to be sorted and indexed!")
+  }
   
   job <- my.jobStart(paste("bam multimatch", basename(bamFile)))
   param <- ScanBamParam(what="qname")

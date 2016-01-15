@@ -36,6 +36,9 @@ export(
   getBamInputReadCount,
   getBamMultiMatching,
   
+  ## bamPlots.R
+  makeAlignmentCountBarPlot,
+  
   ## mapMethods.R
   bwaMem,
   
