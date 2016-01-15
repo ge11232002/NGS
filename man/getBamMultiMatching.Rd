@@ -52,7 +52,7 @@
   addInputReadCounts(bamFiles=tempBamFile, reads1s=reads1, binary="samtools")
   tempBamFile2 <- tempfile(fileext=".bam")
   tempBamFile2 <- sortBam(tempBamFile, 
-                     sub("\\.bam$", "", tempBamFile2, ignore.case=TRUE))
+                     sub("\\\.bam$", "", tempBamFile2, ignore.case=TRUE))
   file.copy(tempBamFile2, tempBamFile, overwrite=TRUE)
   file.remove(tempBamFile2)
   indexBam(tempBamFile)
