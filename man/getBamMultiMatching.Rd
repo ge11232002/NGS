@@ -14,6 +14,8 @@
 \arguments{
   \item{bamFile}{
     The filenames of input bam file.
+    The input bam files have to be sorted and indexed, which means
+    ".bai" file must exit.
   }
   \item{pairedMode}{
     The \code{pairedMode} can be "paired", "first", "second".
@@ -38,8 +40,9 @@
   \code{\link{getBamInputReadCount}}
 }
 \examples{
-  \dontrun{
+  \donttest{
   ## This example is not tested because it requires external software "samtools"
+  ### Prepare the bam files
   bamfile <- system.file("extdata", "ex1.bam", package="Rsamtools",
                          mustWork=TRUE)
   tempBamFile <- tempfile(fileext=".bam")
@@ -47,7 +50,15 @@
   reads1 <- file.path(system.file("extdata", package="NGS"), "fastq",
                     "nanocage_ACAGAT_carp_embryo_R1.fastq")
   addInputReadCounts(bamFiles=tempBamFile, reads1s=reads1, binary="samtools")
+  tempBamFile2 <- tempfile(fileext=".bam")
+  tempBamFile2 <- sortBam(tempBamFile, 
+                     sub("\\.bam$", "", tempBamFile2, ignore.case=TRUE))
+  file.copy(tempBamFile2, tempBamFile, overwrite=TRUE)
+  file.remove(tempBamFile2)
+  indexBam(tempBamFile)
   
+  ### Get the multiMatching; 
+  ### Due to small reads number in the exmaples, we have negative counts for "0"
   getBamMultiMatching(tempBamFile)
   file.remove(tempBamFile)
   }
