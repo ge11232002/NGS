@@ -42,3 +42,34 @@ makeAlignmentCountBarPlot <- function(bamFiles,
           col=multiCountColors[colnames(mmCounts)], 
           xlim=c(0, nrow(mmCounts) +5))
 }
+
+### -----------------------------------------------------------------
+### makeFragLengthHistPlot:  histogram of fragment lengths
+### 
+makeFragLengthHistPlot <- function(bamFiles, mc.cores=getThreads()){
+  ## First make sure all of bamFiles are paired-end
+  paired <- sapply(bamFiles, testPairedEndBam)
+  if(!all(paired)){
+    stop("The fragment length can only be estimated from paired-end reads: ",
+         bamFiles[!paired])
+  }
+  if(is.null(names(bamFiles))){
+    samples <- basename(bamFiles)
+  }else{
+    samples <- names(bamFiles)
+  }
+  
+  ## load the reads
+  mc.cores <- min(mc.cores, length(bamFiles))
+  reads <- mclapply(bamFiles, readGAlignmentPairs, use.names=TRUE, 
+                    mc.cores=mc.cores)
+  widths <- list()
+  for(i in 1:length(reads)){
+    widths[[samples[i]]] <- width(unlist(range(grglist(reads[[i]]))))
+  }
+  toPlot <- data.frame(samples=rep(names(widths), sapply(widths, length)),
+                       fragment.size=unlist(widths))
+  ggplot(toPlot, aes(fragment.size, fill=samples, colour=samples)) +
+    geom_density(alpha = 0.1) + theme_bw()
+}
+

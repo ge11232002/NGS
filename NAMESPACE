@@ -6,8 +6,11 @@ importMethodsFrom(Biostrings, quality, unlist, width)
 importMethodsFrom(IRanges, narrow)
 importMethodsFrom(Rsamtools, indexBam, sortBam, scanBamHeader, ScanBamParam,
                              testPairedEndBam, scanBam)
-importMethodsFrom(GenomicAlignments, readGAlignments, coverage)
+importMethodsFrom(GenomicAlignments, readGAlignments, readGAlignmentPairs,
+                  coverage)
 importMethodsFrom(rtracklayer, export.bw)
+importMethodsFrom(GenomicRanges, grglist, width)
+importMethodsFrom(BiocGenerics, unlist)
 
 ### -----------------------------------------------------------------
 ### Import ordinary functions, variables in other packages
@@ -19,7 +22,7 @@ importFrom(stats, na.omit, setNames)
 importFrom(tools, file_ext)
 importFrom(R.utils, gunzip, isGzipped)
 importFrom(Rsamtools, scanBamFlag, "bamFlag<-")
-
+importFrom(ggplot2, ggplot)
 ### -----------------------------------------------------------------
 ### Export non-generic functions
 ###
@@ -38,6 +41,7 @@ export(
   
   ## bamPlots.R
   makeAlignmentCountBarPlot,
+  makeFragLengthHistPlot,
   
   ## mapMethods.R
   bwaMem,
