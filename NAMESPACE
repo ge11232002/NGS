@@ -22,7 +22,7 @@ importFrom(stats, na.omit, setNames)
 importFrom(tools, file_ext)
 importFrom(R.utils, gunzip, isGzipped)
 importFrom(Rsamtools, scanBamFlag, "bamFlag<-")
-importFrom(ggplot2, ggplot)
+importFrom(ggplot2, ggplot, geom_density, theme_bw, aes)
 ### -----------------------------------------------------------------
 ### Export non-generic functions
 ###

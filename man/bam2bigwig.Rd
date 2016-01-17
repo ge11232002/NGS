@@ -14,7 +14,7 @@
 
 \arguments{
   \item{bamFiles}{
-    The filenames of input bam files.
+    The \code{character}() filenames of input bam files.
   }
   \item{bigwigFiles}{
     The filenames of output bigwig files.
