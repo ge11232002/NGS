@@ -6,7 +6,7 @@ makeAlignmentCountBarPlot <- function(bamFiles,
                                       pairedMode=c("paired", "first", "second"),
                                       mc.cores=getThreads()){
   pairedMode <- match.arg(pairedMode)
-  mc.cores <- min(bamFiles, mc.cores)
+  mc.cores <- min(length(bamFiles), mc.cores)
   mmBAM <- mclapply(bamFiles, getBamMultiMatching, pairedMode=pairedMode,
                     mc.cores=mc.cores)
   if(is.null(names(bamFiles))){
@@ -62,6 +62,7 @@ makeFragLengthHistPlot <- function(bamFiles, fragSizeMax=1000L,
   
   ## load the reads
   mc.cores <- min(mc.cores, length(bamFiles))
+  ### The strand is not important here, so we don't specify the strandMode
   reads <- mclapply(bamFiles, readGAlignmentPairs, use.names=TRUE, 
                     mc.cores=mc.cores)
   widths <- list()
@@ -76,3 +77,58 @@ makeFragLengthHistPlot <- function(bamFiles, fragSizeMax=1000L,
     geom_density(alpha = 0.1) + theme_bw()
 }
 
+### -----------------------------------------------------------------
+### makeSegmentCountHistPlots: histogram of aligned segments per read
+### Exported!
+makeSegmentCountHistPlots <- function(bamFiles,
+                                      pairedMode=c("paired", "first",
+                                                   "second"),
+                                      mc.cores=getThreads()){
+  pairedMode <- match.arg(pairedMode)
+  mc.cores <- min(length(bamFiles), mc.cores)
+  
+  paired <- mclapply(bamFiles, testPairedEndBam, mc.cores=mc.cores)
+  if(length(unique(unlist(paired))) != 1L){
+    stop("All the input bam files have to be both paired-end or single-end")
+  }
+  
+  ## load the bam
+  paired <- unique(unlist(paired))
+  if(paired){
+    param <- ScanBamParam()
+    if(pairedMode == "paired"){
+      ### The strand is not important here, so we don't specify the strandMode
+      reads <- mclapply(bamFiles, readGAlignmentPairs, mc.cores=mc.cores)
+    }else if(pairedMode == "first"){
+      bamFlag(param) <- scanBamFlag(isFirstMateRead=TRUE, isUnmappedQuery=FALSE)
+      reads <- mclapply(bamFiles, readGAlignments,
+                        param=param, mc.cores=mc.cores)
+    }else if(pairedMode == "second"){
+      bamFlag(param) <- scanBamFlag(isSecondMateRead=TRUE,
+                                    isUnmappedQuery=FALSE)
+      reads <- mclapply(bamFiles, readGAlignments,
+                        param=param, mc.cores=mc.cores)
+    }
+  }else{
+    reads <- mclapply(bamFiles, readGAlignment,
+                      mc.cores=mc.cores)
+  }
+  if(is.null(names(bamFiles))){
+    samples <- basename(bamFiles)
+  }else{
+    samples <- names(bamFiles)
+  }
+  names(reads) <- samples
+  
+  segmentCounts <- list()
+  for(i in 1:length(reads)){
+    segmentCounts[[samples[i]]] <- 
+      shrinkToRange(njunc(reads[[i]])+1L, theRange=c(0.5, 10.5))
+  }
+  toPlot <- data.frame(samples=rep(names(segmentCounts),
+                                   sapply(segmentCounts, length)),
+                       fragment.size=unlist(segmentCounts))
+  ggplot(toPlot, aes(fragment.size, fill=samples, colour=samples)) +
+    geom_histogram(binwidth=1, position = "dodge") + theme_bw() + 
+    xlab("# segments in alignment")
+}

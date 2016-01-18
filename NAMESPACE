@@ -7,7 +7,7 @@ importMethodsFrom(IRanges, narrow)
 importMethodsFrom(Rsamtools, indexBam, sortBam, scanBamHeader, ScanBamParam,
                              testPairedEndBam, scanBam)
 importMethodsFrom(GenomicAlignments, readGAlignments, readGAlignmentPairs,
-                  coverage)
+                  coverage, njunc)
 importMethodsFrom(rtracklayer, export.bw)
 importMethodsFrom(GenomicRanges, grglist, width)
 importMethodsFrom(BiocGenerics, unlist)
@@ -22,7 +22,7 @@ importFrom(stats, na.omit, setNames)
 importFrom(tools, file_ext)
 importFrom(R.utils, gunzip, isGzipped)
 importFrom(Rsamtools, scanBamFlag, "bamFlag<-")
-importFrom(ggplot2, ggplot, geom_density, theme_bw, aes)
+importFrom(ggplot2, ggplot, geom_density, theme_bw, aes, xlab)
 ### -----------------------------------------------------------------
 ### Export non-generic functions
 ###
@@ -42,6 +42,7 @@ export(
   ## bamPlots.R
   makeAlignmentCountBarPlot,
   makeFragLengthHistPlot,
+  makeSegmentCountHistPlots,
   
   ## mapMethods.R
   bwaMem,

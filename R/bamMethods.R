@@ -161,3 +161,5 @@ getBamInputReadCount <- function(bamFiles){
   }
   return(ans)
 }
+
+
