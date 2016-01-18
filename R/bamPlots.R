@@ -72,9 +72,9 @@ makeFragLengthHistPlot <- function(bamFiles, fragSizeMax=1000L,
                     theRange=c(-0.5, fragSizeMax+0.5))
   }
   toPlot <- data.frame(samples=rep(names(widths), sapply(widths, length)),
-                       fragment.size=unlist(widths))
-  ggplot(toPlot, aes(fragment.size, fill=samples, colour=samples)) +
-    geom_density(alpha = 0.1) + theme_bw()
+                       "fragmentSize"=unlist(widths))
+  ggplot(toPlot, aes(x=fragmentSize, fill=samples, colour=samples)) +
+    geom_density(alpha = 0.1) + theme_bw() + xlab("Fragment size")
 }
 
 ### -----------------------------------------------------------------
@@ -110,7 +110,7 @@ makeSegmentCountHistPlots <- function(bamFiles,
                         param=param, mc.cores=mc.cores)
     }
   }else{
-    reads <- mclapply(bamFiles, readGAlignment,
+    reads <- mclapply(bamFiles, readGAlignments,
                       mc.cores=mc.cores)
   }
   if(is.null(names(bamFiles))){
@@ -127,8 +127,8 @@ makeSegmentCountHistPlots <- function(bamFiles,
   }
   toPlot <- data.frame(samples=rep(names(segmentCounts),
                                    sapply(segmentCounts, length)),
-                       fragment.size=unlist(segmentCounts))
-  ggplot(toPlot, aes(fragment.size, fill=samples, colour=samples)) +
+                       "fragmentSize"=unlist(segmentCounts))
+  ggplot(toPlot, aes(x=fragmentSize, fill=samples, colour=samples)) +
     geom_histogram(binwidth=1, position = "dodge") + theme_bw() + 
     xlab("# segments in alignment")
 }
