@@ -123,7 +123,7 @@ getBamMultiMatching <- function(bamFile,
   
   nReads <- getBamInputReadCount(bamFile)
   if(!is.na(nReads)){
-    nReadsUnmapped <- nReads - sum(result)
+    nReadsUnmapped <- nReads - length(unique(bamReads))
     result2 <- c("0"=nReadsUnmapped, result2)
     my.writeElapsed(job, "nreads from header loaded")
   }
