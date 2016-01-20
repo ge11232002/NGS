@@ -11,7 +11,7 @@ importMethodsFrom(GenomicAlignments, readGAlignments, readGAlignmentPairs,
 importMethodsFrom(rtracklayer, export.bw)
 importMethodsFrom(GenomicRanges, grglist, width)
 importMethodsFrom(BiocGenerics, unlist, as.data.frame)
-importMethodsFrom(GenomicFeatures, promoters)
+importMethodsFrom(GenomicFeatures, promoters, trim)
 
 ### -----------------------------------------------------------------
 ### Import ordinary functions, variables in other packages
