@@ -14,6 +14,8 @@ promotersFromGFF <- function(gffFn, fastaFn, ...,
   promotersGranges <- sort(promotersGranges)
   promoters_df <- as.data.frame(promotersGranges)
   promoters_df$gene_id <- as.character(promoters_df$gene_id)
+  # select only unique promoters for each gene - there can be multiple promoters
+  # from different transcripts, but they should not have the same start and end
   promoters_df <- promoters_df[order(promoters_df$seqnames,
                                       promoters_df$start,
                                       promoters_df$strand,
