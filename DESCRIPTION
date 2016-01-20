@@ -1,6 +1,6 @@
 Package: NGS
-Version: 0.0.9
-Date: 2016-01-19
+Version: 0.0.10
+Date: 2016-01-20
 Title: Next Generation Sequencing Data Analysis
 Description: The whole pipeline of analysing next generation sequencing data.
 Author: Ge Tan <ge.tan09@imperial.ac.uk>
@@ -17,7 +17,8 @@ Imports: Biostrings (>= 2.38.2),
          rtracklayer (>= 1.30.1),
          GenomicRanges (>= 1.22.3),
          ggplot2,
-         BiocGenerics
+         BiocGenerics,
+         GenomicFeatures (>= 1.22.8)
 Depends: R (>= 3.2.2)
 Suggests: BiocStyle,
           knitr,

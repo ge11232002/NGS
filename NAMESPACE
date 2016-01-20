@@ -10,12 +10,12 @@ importMethodsFrom(GenomicAlignments, readGAlignments, readGAlignmentPairs,
                   coverage, njunc)
 importMethodsFrom(rtracklayer, export.bw)
 importMethodsFrom(GenomicRanges, grglist, width)
-importMethodsFrom(BiocGenerics, unlist)
+importMethodsFrom(BiocGenerics, unlist, as.data.frame)
 
 ### -----------------------------------------------------------------
 ### Import ordinary functions, variables in other packages
 ###
-importFrom(Biostrings, fastq.geometry, PhredQuality)
+importFrom(Biostrings, fastq.geometry, PhredQuality, fasta.seqlengths)
 importFrom(caTools, runmean)
 importFrom(parallel, detectCores, mclapply)
 importFrom(stats, na.omit, setNames)
@@ -23,6 +23,8 @@ importFrom(tools, file_ext)
 importFrom(R.utils, gunzip, isGzipped)
 importFrom(Rsamtools, scanBamFlag, "bamFlag<-")
 importFrom(ggplot2, ggplot, geom_density, theme_bw, aes, xlab, geom_histogram)
+importFrom(GenomicFeatures, makeTxDbFromGFF)
+
 ### -----------------------------------------------------------------
 ### Export non-generic functions
 ###
@@ -46,6 +48,10 @@ export(
   
   ## mapMethods.R
   bwaMem,
+  
+  ## CAGE.R
+  promotersFromGFF,
+  assignTCsToPromoters,
   
   ## util.R
   grepPatternList
