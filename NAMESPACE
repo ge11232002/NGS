@@ -9,9 +9,9 @@ importMethodsFrom(Rsamtools, indexBam, sortBam, scanBamHeader, ScanBamParam,
 importMethodsFrom(GenomicAlignments, readGAlignments, readGAlignmentPairs,
                   coverage, njunc)
 importMethodsFrom(rtracklayer, export.bw)
-importMethodsFrom(GenomicRanges, grglist, width, findOverlaps)
+importMethodsFrom(GenomicRanges, grglist, width, findOverlaps, trim)
 importMethodsFrom(BiocGenerics, unlist, as.data.frame)
-importMethodsFrom(GenomicFeatures, promoters, trim)
+importMethodsFrom(GenomicFeatures, promoters)
 
 ### -----------------------------------------------------------------
 ### Import ordinary functions, variables in other packages
