@@ -9,7 +9,7 @@ importMethodsFrom(Rsamtools, indexBam, sortBam, scanBamHeader, ScanBamParam,
 importMethodsFrom(GenomicAlignments, readGAlignments, readGAlignmentPairs,
                   coverage, njunc)
 importMethodsFrom(rtracklayer, export.bw)
-importMethodsFrom(GenomicRanges, grglist, width)
+importMethodsFrom(GenomicRanges, grglist, width, findOverlaps)
 importMethodsFrom(BiocGenerics, unlist, as.data.frame)
 importMethodsFrom(GenomicFeatures, promoters, trim)
 
@@ -25,6 +25,7 @@ importFrom(R.utils, gunzip, isGzipped)
 importFrom(Rsamtools, scanBamFlag, "bamFlag<-")
 importFrom(ggplot2, ggplot, geom_density, theme_bw, aes, xlab, geom_histogram)
 importFrom(GenomicFeatures, makeTxDbFromGFF)
+importFrom(GenomicRanges, makeGRangesFromDataFrame)
 
 ### -----------------------------------------------------------------
 ### Export non-generic functions
