@@ -18,7 +18,8 @@ Imports: Biostrings (>= 2.38.2),
          GenomicRanges (>= 1.22.3),
          ggplot2,
          BiocGenerics,
-         GenomicFeatures (>= 1.22.8)
+         GenomicFeatures (>= 1.22.8),
+         S4Vectors (>= 0.8.11)
 Depends: R (>= 3.2.2)
 Suggests: BiocStyle,
           knitr,

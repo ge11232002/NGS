@@ -39,7 +39,7 @@
   tempBamFile <- tempfile(fileext=".bam")
   file.copy(bamfile, tempBamFile)
   reads1 <- file.path(system.file("extdata", package="NGS"), "fastq",
-                    "nanocage_ACAGAT_carp_embryo_R1.fastq")
+                      "nanocage_ACAGAT_carp_embryo_R1.fastq")
   addInputReadCounts(bamFiles=tempBamFile, reads1s=reads1, binary="samtools")
   file.remove(tempBamFile)
   }

@@ -1,7 +1,7 @@
 ### -----------------------------------------------------------------
 ### Import S4 methods defined in other packages
 ###
-importMethodsFrom(ShortRead, FastqStreamer, yield, writeFastq)
+importMethodsFrom(ShortRead, FastqStreamer, yield, writeFastq, readFastq, sread)
 importMethodsFrom(Biostrings, quality, unlist, width)
 importMethodsFrom(IRanges, narrow)
 importMethodsFrom(Rsamtools, indexBam, sortBam, scanBamHeader, ScanBamParam,
@@ -12,6 +12,7 @@ importMethodsFrom(rtracklayer, export.bw)
 importMethodsFrom(GenomicRanges, grglist, width, findOverlaps, trim)
 importMethodsFrom(BiocGenerics, unlist, as.data.frame)
 importMethodsFrom(GenomicFeatures, promoters)
+importMethodsFrom(S4Vectors, isConstant)
 
 ### -----------------------------------------------------------------
 ### Import ordinary functions, variables in other packages

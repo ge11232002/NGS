@@ -201,4 +201,42 @@ fastUniq <- function(reads1, outputDir=".", binary="fastuniq"){
   return(file.path(outputDir, sub("\\.gz$", "", basename(reads1))))
 }
 
-
+### -----------------------------------------------------------------
+### barcodeSplitter: split the fastq file with different barcodes,
+### optionally check for must-have sequence at certail position
+### Give up. Use TagDust.
+### 
+barcodeSplitter <- function(reads1, barcodes, mustSeq=NULL, start=NULL,
+                            nthread=getThreads()){
+  if(!isConstant(nchar(barcodes))){
+    stop("The barcodes must have same length!")
+  }
+  if(xor(is.null(mustSeq), is.null(start))){
+    stop("The mustSeq and start must be used or not used together!")
+  }
+  barcodeWidth <- nchar(barcodes)[1]
+  reads2 <- getPairedReads(reads1)
+  if(is.null(reads2)){
+    message("Single end reads!")
+    paired <- FALSE
+  }else{
+    message("Paired end reads!")
+    paired <- TRUE
+    fastq2 <- readFastq(reads2)
+  }
+  fastq1 <- readFastq(reads1)
+  
+  ## filter out reads without mustSeq
+  if(!is.null(mustSeq)){
+    mustSubSeqs <- subseq(sread(fastq1), start=start, width=nchar(mustSeq))
+    similarityScores <- stringsim(a=mustSeq, b=as.character(mustSubSeqs),
+                                  method="jw", nthread=nthread)
+    distanceScores <- stringdist(a=mustSeq, b=as.character(mustSubSeqs),
+                                  method="osa", nthread=nthread)
+  }
+  
+  ##
+  frontSeqs <- subseq(sread(fastq1), start=1, width=barcodeWidth)
+  similarityScores <- sapply(barcodes, stringsim, b=as.character(frontSeqs),
+                             method="osa", nthread=nthread)
+}
