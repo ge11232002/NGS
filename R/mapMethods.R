@@ -32,7 +32,9 @@ bwaMem <- function(reads1, output, ref, opt="", mc.cores=getThreads(),
   args <- c("mem", "-t", mc.cores, opt, ref, reads1, reads2,
             "|", binarySamtools, "view -b - >", output)
   ## run bwa
-  system2(command=binaryBWA, args=args)
+  res <- system2(command=binaryBWA, args=args)
+  stopifnot(res == 0L)
+  ### res: 0 success
   
   ## add input read count
   message("Add input read counts.")
