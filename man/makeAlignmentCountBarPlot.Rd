@@ -49,26 +49,10 @@
   \code{\link{getBamMultiMatching}}
 }
 \examples{
-  \donttest{
-  ## This example is not tested because it requires external software "samtools"
-  ### Prepare the bam files
-  bamfile <- system.file("extdata", "ex1.bam", package="Rsamtools",
-                         mustWork=TRUE)
-  tempBamFile <- tempfile(fileext=".bam")
-  file.copy(bamfile, tempBamFile)
-  reads1 <- file.path(system.file("extdata", package="NGS"), "fastq",
-                    "nanocage_ACAGAT_carp_embryo_R1.fastq")
-  addInputReadCounts(bamFiles=tempBamFile, reads1s=reads1, binary="samtools")
-  tempBamFile2 <- tempfile(fileext=".bam")
-  tempBamFile2 <- sortBam(tempBamFile, 
-                     sub("\\\.bam$", "", tempBamFile2, ignore.case=TRUE))
-  file.copy(tempBamFile2, tempBamFile, overwrite=TRUE)
-  file.remove(tempBamFile2)
-  indexBam(tempBamFile)
-  
+  bamFile <- system.file("extdata", "bam", "nanocage_ACAGAT_carp_embryo.bam",
+                         package="NGS")
   ### Plot the barplot
-  makeAlignmentCountBarPlot(tempBamFile)
-  file.remove(read-alignment-statistics.txt)
-  file.remove(tempBamFile)
+  makeAlignmentCountBarPlot(bamFile)
+  file.remove("read-alignment-statistics.txt")
   }
 }
