@@ -1,3 +1,5 @@
+import(BiocGenerics)
+
 ### -----------------------------------------------------------------
 ### Import S4 methods defined in other packages
 ###
@@ -10,7 +12,6 @@ importMethodsFrom(GenomicAlignments, readGAlignments, readGAlignmentPairs,
                   coverage, njunc)
 importMethodsFrom(rtracklayer, export.bw)
 importMethodsFrom(GenomicRanges, grglist, width, findOverlaps, trim)
-importMethodsFrom(BiocGenerics, unlist, as.data.frame)
 importMethodsFrom(GenomicFeatures, promoters)
 importMethodsFrom(S4Vectors, isConstant)
 

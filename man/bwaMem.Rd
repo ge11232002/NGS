@@ -57,8 +57,9 @@
   \dontrun{
   ## This example is not tested because it requires external software "bwa" and
   ## reads/reference
-    bwaMem(reads1="../../fastq/trim_galore/nanocage_ACAGAT_carp_embryo_R1_val_1.fq.gz", 
-           output="nanocage_ACAGAT_carp_embryo.bam", 
+    bwaMem(reads1=file.path(system.file("extdata", package="NGS"), "fastq",
+                            "nanocage_ACAGAT_carp_embryo_R1.fastq"),
+           output="nanocage_ACAGAT_carp_embryo.bam",
            ref="/mnt/biggles/data/reference/Cyprinus_carpio/Leiden/cypCar1/Sequence/BWAIndex/genome.fa", 
            opt = "", mc.cores=4)
   }
