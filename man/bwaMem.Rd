@@ -60,7 +60,8 @@
     bwaMem(reads1=file.path(system.file("extdata", package="NGS"), "fastq",
                             "nanocage_ACAGAT_carp_embryo_R1.fastq"),
            output="nanocage_ACAGAT_carp_embryo.bam",
-           ref="/mnt/biggles/data/reference/Cyprinus_carpio/Leiden/cypCar1/Sequence/BWAIndex/genome.fa", 
+           ref=file.path(system.file("extdata", package="NGS"), "reference",
+                         "BWAIndex", "genome.fa"),
            opt = "", mc.cores=4)
   }
 }

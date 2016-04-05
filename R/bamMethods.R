@@ -75,7 +75,7 @@ bam2bigwig <- function(bamFiles,
                                        ignore.case=TRUE)
                        ){
   if(length(bamFiles) != length(bigwigFiles)){
-    stop("The number of input bam names differ from output bigwig names!")
+    stop("The number of input bam names differs from output bigwig names!")
   }
   for(i in 1:length(bamFiles)){
     job <- my.jobStart(paste("start", basename(bamFiles)))

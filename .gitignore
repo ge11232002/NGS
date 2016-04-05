@@ -1,3 +1,6 @@
+# Some big examples
+inst/extdata/reference
+
 # History files
 .Rhistory
 .Rapp.history

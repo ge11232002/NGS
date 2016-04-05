@@ -35,9 +35,11 @@ bwaMem <- function(reads1, output, ref, opt="", mc.cores=getThreads(),
   system2(command=binaryBWA, args=args)
   
   ## add input read count
+  message("Add input read counts.")
   addInputReadCounts(output, reads1)
   
   ## sort and index bam
+  message("Sort and index bam files.")
   tempBam <- tempfile(fileext=".bam")
   tempBam <- sortBam(output, sub("\\.bam$", "", tempBam, ignore.case=TRUE))
   
@@ -46,6 +48,7 @@ bwaMem <- function(reads1, output, ref, opt="", mc.cores=getThreads(),
   indexBam(output)
   
   ## bam to bigwig files
+  message("bam to bigwig conversion.")
   bam2bigwig(output)
   
   invisible(output)
